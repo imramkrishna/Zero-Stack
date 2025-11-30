@@ -2,6 +2,7 @@ import { Context } from "elysia";
 import { StatusCode } from "../../types";
 import simpleGit from "simple-git";
 import generateId from "../../utils/generateId";
+import checkUrl from "../../utils/checkUrl";
 
 const cloneRepoController = async ({ body, set }: Context) => {
     const req = body as { repoUrl: string };
@@ -12,14 +13,21 @@ const cloneRepoController = async ({ body, set }: Context) => {
                 message: "Repository URL is required"
             }
         }
-        const id = generateId();
-        const isValidRepo=await simpleGit().listRemote([req.repoUrl]).then(() => true).catch(() => false);
-        if(!isValidRepo){
+        const isValidRepo = await checkUrl(req.repoUrl);
+        if (!isValidRepo) {
             set.status = StatusCode.BAD_REQUEST
             return {
                 message: "Invalid repository URL"
             }
         }
+        const isSizeValid = await checkSize(req.repoUrl);
+        if (!isSizeValid) {
+            set.status = StatusCode.BAD_REQUEST
+            return {
+                message: "Repository size exceeds the limit of 100MB"
+            }
+        }
+        const id = generateId();
         await simpleGit().clone(req.repoUrl, `./cloned-repo/${id}`)
         return {
             message: "Repository cloned successfully",
