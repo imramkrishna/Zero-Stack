@@ -20,7 +20,7 @@ const checkAuthToken=new Elysia().derive(async({headers,set})=>{
     return{
         user:verifyToken.user
     }; 
-})
+}).as("scoped")
 const checkAuthPlugin=new Elysia()
 .use(checkAuthToken)
 .guard({
@@ -32,5 +32,5 @@ const checkAuthPlugin=new Elysia()
             }
         } 
     }
-})
+}).as("scoped")
 export default checkAuthPlugin;
