@@ -59,7 +59,7 @@ export const DeploymentCard = ({ deployment }: DeploymentCardProps) => {
       </p>
 
       {/* Footer */}
-      <div className="flex items-center justify-between text-sm text-slate-400 pt-4 border-t border-slate-700/50">
+      <div className="flex items-center justify-between text-sm text-slate-400 pt-4 border-t border-nexus-card-border/50">
         <div className="flex items-center gap-4">
           <span>by {deployment.author}</span>
           <span className="flex items-center gap-1">

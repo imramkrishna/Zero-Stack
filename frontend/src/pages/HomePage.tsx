@@ -3,19 +3,23 @@ import { ArrowRight, Zap, Shield, Globe } from 'lucide-react';
 
 export const HomePage = () => {
   return (
-    <div className="min-h-screen bg-slate-950 relative overflow-hidden">
+    <div className="min-h-screen bg-nexus-dark-bg relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-nexus-blue/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
         {/* Grid pattern */}
-        <svg className="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg">
+        <div className="absolute inset-0 bg-grid-pattern opacity-20"></div>
+        {/* Decorative diagonal lines */}
+        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="home-grid" width="50" height="50" patternUnits="userSpaceOnUse">
-              <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgb(71, 85, 105)" strokeWidth="0.5" />
-            </pattern>
+            <linearGradient id="homeLineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#4A9EFF" stopOpacity="0" />
+              <stop offset="50%" stopColor="#4A9EFF" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#4A9EFF" stopOpacity="0" />
+            </linearGradient>
           </defs>
-          <rect width="100%" height="100%" fill="url(#home-grid)" />
+          <line x1="0" y1="30%" x2="100%" y2="35%" stroke="url(#homeLineGradient)" strokeWidth="2" />
+          <line x1="0" y1="60%" x2="100%" y2="58%" stroke="url(#homeLineGradient)" strokeWidth="1.5" opacity="0.8" />
+          <line x1="0" y1="80%" x2="100%" y2="75%" stroke="url(#homeLineGradient)" strokeWidth="1" opacity="0.6" />
         </svg>
       </div>
 
@@ -24,7 +28,7 @@ export const HomePage = () => {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <span className="text-2xl font-bold text-slate-100">
-              N<span className="text-nexus-blue">EX</span>US
+              N<span className="text-[#4A9EFF]">EX</span>US
             </span>
           </Link>
           <div className="flex items-center gap-4">
@@ -48,7 +52,7 @@ export const HomePage = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-20 pb-32 text-center">
         <h1 className="text-6xl md:text-7xl font-bold text-slate-100 mb-6">
           Deploy with
-          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-nexus-blue to-purple-500">
+          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#4A9EFF] to-[#6B5FFF]">
             Confidence
           </span>
         </h1>
@@ -69,8 +73,8 @@ export const HomePage = () => {
         {/* Features */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-32">
           <div className="card p-8 text-left">
-            <div className="w-12 h-12 bg-nexus-blue/10 rounded-lg flex items-center justify-center mb-4">
-              <Zap className="w-6 h-6 text-nexus-blue" />
+            <div className="w-12 h-12 bg-[#4A9EFF]/10 rounded-lg flex items-center justify-center mb-4">
+              <Zap className="w-6 h-6 text-[#4A9EFF]" />
             </div>
             <h3 className="text-xl font-semibold text-slate-100 mb-3">Lightning Fast</h3>
             <p className="text-slate-400">
