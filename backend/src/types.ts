@@ -2,7 +2,7 @@ export type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'OPTIONS'
 export interface Route{
     path: string;
     method: HTTPMethod;
-    handler: ()=>{};
+    handler: (data:any)=>{};
     isProtected: boolean;
 }
 export enum StatusCode{
