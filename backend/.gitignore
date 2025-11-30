@@ -2,9 +2,10 @@
 
 # dependencies
 /node_modules
+/.DS_Store
 /.pnp
 .pnp.js
-
+.DS_Store
 # testing
 /coverage
 
