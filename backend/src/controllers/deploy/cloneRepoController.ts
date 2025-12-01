@@ -5,7 +5,7 @@ import generateId from "../../utils/generateId";
 import checkUrl from "../../utils/checkUrl";
 
 const cloneRepoController = async ({ body, set }: Context) => {
-    const req = body as { repoUrl: string };
+    const req = body as { repoUrl: string,packageInstallerCommand?:string,buildCommand?:string,startCommand?:string,outputDir?:string,projectType?:string };
     try {
         if (!req.repoUrl) {
             set.status = StatusCode.FORBIDDEN
@@ -31,7 +31,12 @@ const cloneRepoController = async ({ body, set }: Context) => {
         await simpleGit().clone(req.repoUrl, `./cloned-repo/${id}`)
         return {
             message: "Repository cloned successfully",
-            repoId: id
+            repoId: id,
+            buildCommand: req.buildCommand || "npm run build",
+            startCommand: req.startCommand || "npm start",
+            outputDir: req.outputDir || "dist",
+            projectType: req.projectType || "React",
+            packageInstallerCommand: req.packageInstallerCommand || "npm install"
         }
     } catch (error) {
         console.error("Error in cloneRepoController:", error);

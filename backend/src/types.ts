@@ -4,7 +4,7 @@ export interface Route{
     method: HTTPMethod;
     handler: (data:any)=>{};
     isProtected: boolean;
-    middlewares?: Array<(data:any)=>{}>;
+    middlewares?: Array<(()=>{})>;
 }
 export enum StatusCode{
     OK = 200,
