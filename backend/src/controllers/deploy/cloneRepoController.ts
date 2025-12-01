@@ -29,6 +29,17 @@ const cloneRepoController = async ({ body, set }: Context) => {
         }
         const id = generateId();
         await simpleGit().clone(req.repoUrl, `./cloned-repo/${id}`)
+        if(req.projectType==="PlainHTML"){
+            return {
+                message: "Repository cloned successfully",
+                repoId: id,
+                buildCommand: "",
+                startCommand: "",
+                outputDir: "",
+                projectType: req.projectType || "PlainHTML",
+                packageInstallerCommand: ""
+            }
+        }
         return {
             message: "Repository cloned successfully",
             repoId: id,
