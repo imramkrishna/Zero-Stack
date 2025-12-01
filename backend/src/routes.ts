@@ -1,6 +1,8 @@
 import dashboardController from "./controllers/auth/dashboardController";
 import loginController from "./controllers/auth/loginController";
+import buildController from "./controllers/deploy/buildController";
 import cloneRepoController from "./controllers/deploy/cloneRepoController";
+import uploadController from "./controllers/deploy/uploadController";
 import { Route } from "./types";
 const routes:Route[] = [
     {
@@ -32,6 +34,18 @@ const routes:Route[] = [
         method: "POST",
         handler: cloneRepoController,
         isProtected: false
+    },
+    {
+        path:"/build-repo",
+        method:"POST",
+        handler:buildController,
+        isProtected:false
+    },
+    {
+        path:"/upload-repo",
+        method:"POST",
+        handler:uploadController,
+        isProtected:false
     }
 ];
 

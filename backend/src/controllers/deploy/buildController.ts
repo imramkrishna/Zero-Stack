@@ -3,10 +3,9 @@ import { StatusCode } from "../../types";
 import { spawn } from "bun";
 import fs from "fs"
 const buildController = async ({ body, set }: Context) => {
-    const req = body as { repoId: string, buildCommand: string, startCommand: string, outputDir: string, projectType: string, packageInstallerCommand: string };
+    const req = body as { repoId: string,buildCommand: string, startCommand: string, outputDir: string, projectType: string, packageInstallerCommand: string };
     try {
         const repoId = req.repoId;
-
         let p = spawn({
             cmd: req.packageInstallerCommand.split(" "),
             cwd: `./cloned-repo/${repoId}`,
@@ -22,7 +21,7 @@ const buildController = async ({ body, set }: Context) => {
         }
         if (errorOutput) {
             console.log("Error during npm install:", errorOutput);
-            fs.rmdirSync(`./cloned-repo/${repoId}`, { recursive: true });
+            //fs.rmdirSync(`./cloned-repo/${repoId}`, { recursive: true });
             set.status = StatusCode.INTERNAL_SERVER_ERROR
             return {
                 message: "Error during npm install",
@@ -44,7 +43,7 @@ const buildController = async ({ body, set }: Context) => {
         }
         if (errorOutput) {
             console.log("Error during build:", errorOutput);
-            fs.rmdirSync(`./cloned-repo/${repoId}`, { recursive: true });
+            //fs.rmdirSync(`./cloned-repo/${repoId}`, { recursive: true });
             set.status = StatusCode.INTERNAL_SERVER_ERROR
             return {
                 message: "Error during build",
@@ -60,7 +59,7 @@ const buildController = async ({ body, set }: Context) => {
             }
         } else {
             set.status = StatusCode.INTERNAL_SERVER_ERROR
-            fs.rmdirSync(`./cloned-repo/${repoId}`, { recursive: true });
+            //fs.rmdirSync(`./cloned-repo/${repoId}`, { recursive: true });
             return {
                 message: "Build output directory does not exist.",
                 error: "Invalid output directory." + req.outputDir + " not found."
@@ -68,7 +67,7 @@ const buildController = async ({ body, set }: Context) => {
         }
     } catch (error) {
         console.log("Error while building the project:");
-        fs.rmdirSync(`./cloned-repo/${req.repoId}`, { recursive: true });
+        //fs.rmdirSync(`./cloned-repo/${req.repoId}`, { recursive: true });
         set.status = StatusCode.INTERNAL_SERVER_ERROR
         return {
             message: "Error while building the project",
